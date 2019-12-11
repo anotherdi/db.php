@@ -172,13 +172,14 @@ class DBMan {
     $keys = $this->get_schema_unmasked();
     $cols = [];
     $vals = [];
+    $values = [];
     foreach($keys as $key){
       $cols[] = $key['Field'];
       $vals[] = $this->quote_from_post($key);
+      $values[$key['Field']] = $this->quote_from_post($key);
     }
 
-    $q = $this->get_insert_query($cols, $vals, $tablename);
-    echo $q;
+    $q = $this->get_insert_query($values, $tablename);
     $this->db->query($q); 
     echo '<div class="uk-alert-success" uk-alert>追加しました<form action="" method="POST">';
     echo '<blockquote class=\"uk-alert-success\"><dl class="uk-description-list">';
@@ -190,10 +191,14 @@ class DBMan {
     echo '</dl></blockquote></div>';
   }
 
-  function get_insert_query($cols, $vals, $tablename){
+  function get_insert_query($values, $tablename){
+    foreach($values as $key => $val){
+        $cols[] = $key;
+        $vals[] = $val;
+    }
     $val = join(',', $vals);
     $col = '`'.join('`,`', $cols).'`';
-    return "insert into ${tablename} (${col}) values (${val})";
+    return "insert into $tablename ($col) values ($val)";;
   }
 
   function confirm_delete(){
