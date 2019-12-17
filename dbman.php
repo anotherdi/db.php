@@ -158,7 +158,7 @@ class DBMan {
         $wheres[] = "`$k` = $v";
       }
       else {
-        $vals[] = "`$k` = $v";
+        $vals[] = "`$k` = $v"; 
       }
     }
     $set = join(',', $vals);
