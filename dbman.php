@@ -147,16 +147,23 @@ class DBMan {
 
   function update(){
     $tablename = $this->tablename;
-    $keys = $this->get_schema();
-    $cols = [];
+    $fields = $this->get_schema_unmasked();
+    $pkeys = $this->get_primary_key_field();
     $vals = [];
-    foreach($keys as $key){
-      $cols[] = $key['Field'];
-      $vals[] = $this->quote_from_post($key);
+    $wheres = [];
+    foreach($fields as $f){
+      $k = $f['Field'];
+      $v = $this->quote_from_post($f);
+      if(in_array($k, $pkeys)) {
+        $wheres[] = "`$k` = $v";
+      }
+      else {
+        $vals[] = "`$k` = $v";
+      }
     }
-    $vals = join(',', $this->db->escape($vals));
-    $cols = '`'.join('`,`', $cols).'`';
-    $this->db->query("replace into ${tablename} (${cols}) values (${vals})"); 
+    $set = join(',', $vals);
+    $where = join(' and ', $wheres);
+    $this->db->query("update ${tablename} set $set where $where"); 
     echo '<div class="uk-alert-success" uk-alert>更新しました<form action="" method="POST">';
     echo '<blockquote><dl class="uk-description-list">';
     foreach($_POST as $key => $val){
