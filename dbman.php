@@ -138,11 +138,12 @@ class DBMan {
       $keys = $this->get_schema_unmasked();
     }
     foreach($keys as $key){
-      $cond[] = $key['Field'].' = '.$this->quote_from_post($key);
+      $cond[] = '`'.$key['Field'].'` = '.$this->quote_from_post($key);
     }
     $where = join(' and ', $cond);
     echo "<div class=\"uk-alert-success\" uk-alert>削除しました<blockquote>${where}</blockquote></div>";
-    $this->db->query("delete from ${tablename} where ${where}");
+    $q = "delete from ${tablename} where ${where}";
+    $this->db->query($q);
   }
 
   function update(){
