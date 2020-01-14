@@ -277,7 +277,8 @@ class DBMan {
       }
       echo "<td><input class=\"$class\" type=\"${type}\" name=\"${col}\" placeholder=\"${label}\" ${value}></td>\n";
     }
-    echo '<td><button class="uk-button uk-button-primary" name="command" value="insert" type="submit">追加</button></td></form></tr>';
+    echo '<td><button class="uk-button uk-button-primary" name="command" value="insert" type="submit">追加</button> '
+         .'<button class="uk-button uk-button-default" name="command" type="reset">削除</button></td></form></tr>';
     foreach($rows as $row){
       ?>
       <form action="" method="POST">
