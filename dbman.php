@@ -247,7 +247,7 @@ class DBMan {
     $cols = $this->get_schema_field_unmasked($tablename);
     $schema = $this->get_schema_unmasked($tablename);
 
-    echo '<table class="uk-table uk-text-nowrap uk-table-small uk-table-middle" id="dbman"><thead>';
+    echo '<table class="uk-text-nowrap" id="dbman"><thead>';
     foreach($cols as $col){
       if($this->label[$col]){
         $col = $this->label[$col];

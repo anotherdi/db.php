@@ -1,0 +1,17 @@
+#dbman {
+  border-collapse: collapse;
+}
+
+#dbman td, #dbman th {
+    padding: 0;
+    border: 1px solid;
+    text-align:center;
+    position: relative;
+}
+
+#dbman td .uk-input {
+    padding: 0.1em;
+    border: 0;
+    width:100%; 
+    box-sizing:border-box;
+}
