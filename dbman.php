@@ -262,7 +262,7 @@ class DBMan {
       $type = $this->get_input_type($s);
       if($type==='checkbox'){
         $value = 'value="1"';
-        $class = 'uk-checkbox uk-align-center';
+        $class = 'uk-checkbox';
       }
       else {
         $value = '';
@@ -304,7 +304,7 @@ class DBMan {
           $disabled = '';
         }
         if($type==='checkbox'){
-          $class = 'uk-checkbox uk-align-center';
+          $class = 'uk-checkbox';
           if($value!='0'){
             $checked = 'checked';
           }
